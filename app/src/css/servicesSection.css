@@ -1,0 +1,38 @@
+.services_section{
+    margin-top: 50px;
+    width: 98vw;
+    padding: 20px;
+  
+
+}
+.services_section_services{
+    padding: 10px 20px;
+}
+
+.services_section_heading{
+    margin: 20px;
+}
+.service_box{
+    position: relative;
+    margin: 5px;
+    padding: 5px;
+}
+.service_image img{
+    width: 200px;
+}
+.service_title{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: white;
+}
+
+@media screen  and (max-width: 500px){
+    .services_section_services{
+        flex-direction: column;
+    }
+    .service_image img{
+        width: 300px;
+    }
+}
+

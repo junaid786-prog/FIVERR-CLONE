@@ -1,0 +1,234 @@
+.gig_page{
+    padding: 10px;
+    display: flex;
+    width: 90vw;
+    padding-top: 70px;
+    /* position: relative; */
+}
+
+.gig_page_left{
+    width: 50vw;
+}
+.gig_page_title{
+    font-size: large;
+    font-weight: bolder;
+}
+.gig_page_user_info{
+    display: flex;
+    align-items: center;
+}
+.gig_page_user_info p{
+    padding-left: 10px;
+    padding-right: 5px;
+}
+.gig_page_user_info p:nth-child(2){
+    font-size: large;
+    font-weight: bold;
+}
+.gig_page_user_info p:nth-child(3){
+    color: rgb(107, 102, 102);
+
+}
+.c_orange{
+    color: orange;
+}
+.gig_page_images img{
+    width: 650px;
+    padding: 10px;
+}
+.gig_page_description{
+    padding: 10px 20px;
+}
+.gig_page_description p, .gig_page_packages_box p{
+    letter-spacing: 1.1px;
+    font-size: large;
+    color: rgb(107, 102, 102);
+}
+/* about */
+
+.gig_page_about_seller{
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+}
+.about_seller_top{
+    display: flex;
+    align-items: center;
+}
+.about_seller_avtar img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.about_seller_info{
+    margin-left: 20px;
+}
+.about_seller_info p{
+    font-weight: bold;
+}
+.btn button, .select button{
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    color: rgb(107, 102, 102);
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.btn button:hover{
+    background-color: rgb(54, 49, 49);
+    color: white;
+}
+.about_seller_bottom{
+    border: 1px solid rgb(194, 188, 188);
+    margin-top: 20px;
+    padding: 10px 20px;
+    color: rgb(107, 102, 102);
+
+}
+.bottom_info_box{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+
+}
+.bottom_info_box p{
+    font-size: large;
+}
+.bottom_info_box span{
+    display: block;
+    font-weight: bolder;
+    font-size: larger;
+}
+/*packaes*/
+.gig_page_packages{
+    padding: 10px 20px;
+
+}
+/* .gig_page_packages_box{
+    display: flex;
+    border: 1px solid rgb(231, 223, 223);
+    margin-top: 20px;
+}
+.gig_page_pkg{
+    padding: 10px;
+    border-left: 1px solid rgb(231, 223, 223);
+}
+.box_1{
+    padding: 10px;
+} */
+.gig_page_packages_box{
+    display:grid;
+    margin-top: 20px;
+    grid-template-columns: 150px 200px 200px;
+    border: 1px solid rgb(107, 102, 102);
+    border-left: none;
+    border-bottom: none;
+    width: 550px;
+}
+.gig_page_pkg_name p{
+    color:black;
+    padding-bottom: 5px;
+}
+.gig_page_pkg_description p{
+    font-size: medium;
+    letter-spacing: normal;
+    color: rgb(90, 85, 85);
+}
+.item_1{
+    height: 150px;
+    padding: 10px 5px;
+    border:1px solid rgb(107, 102, 102);
+    border-top: none;
+    border-right: none;
+
+}
+.item_2{
+    height: 40px;
+    padding: 10px 5px;
+    border:1px solid rgb(107, 102, 102);
+    border-top: none;
+    border-right: none;
+    background-color: whitesmoke;
+}
+.item_3{
+    height: 40px;
+    padding: 10px 5px;
+    border:1px solid rgb(107, 102, 102);
+    border-top: none;
+    border-right: none;
+
+}
+.item_4{
+    height: 100px;
+    padding: 10px 5px;
+    border:1px solid rgb(107, 102, 102);
+    border-top: none;
+    border-right: none;
+
+}
+.pd_5{
+    padding-top: 5px;
+}
+.pd_10{
+    padding-top: 20px;
+}
+.select button{
+    background-color: rgb(29,191,115);
+    color: white;
+    border: none;
+}
+.last{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/*second section*/
+.gig_page_right{
+    position: fixed;
+    top:100px;
+    right:20px;
+}
+.pkgs_tabs{
+    border: 1px solid rgb(182, 178, 178);
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+}
+.pkgs_tabs_top button{
+    width: 166px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid rgb(182, 178, 178);
+    border-right: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size:medium;
+}
+.btn_active{
+    border: 1px solid rgb(191, 115, 29);
+    color: rgb(29,191,115);
+}
+.display_pkg{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:400px;
+    padding: 20px;
+}
+.display_pkg button{
+    height: 40px;
+    margin-top: 20px;
+    background-color: rgb(29,191,115);
+    border: none;
+    font-size: medium;
+    font-weight: 600;
+}
+.display_pkg_info{
+    display: flex;
+    justify-content: space-between;
+}

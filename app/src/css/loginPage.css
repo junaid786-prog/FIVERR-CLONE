@@ -1,0 +1,81 @@
+/* login page*/
+.login_page{
+    width: 98vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 150px;
+}
+/* login section*/
+.login_section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+    padding: 50px 10px;
+    margin-bottom: 20px;
+    width: 450px;
+    box-shadow: 5px 5px 10px rgb(214, 207, 207),-5px -5px 10px rgb(214, 207, 207);
+}
+.section_heading{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.continue_btns{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0px;
+}
+.continue_btns button,.continue_btns input, .login_btn button{
+    margin: 5px 0px;
+    padding: 10px;
+    width: 250px;
+    border: 1px solid rgb(204, 194, 194);
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+.login_first_input{
+    margin-top: 20px;
+}
+.login_btn button{
+    background-color: rgb(29,191,115);
+}
+.rememberence{
+    display: flex;
+    align-items: center;
+    width: 450px;
+    justify-content: space-between;
+    padding: 40px;
+}
+.remember_me{
+    display: flex;
+    align-items: center;
+}
+.remember_me p{
+    padding-left: 5px;
+}
+.joining_section{
+    margin-top: 20px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+/* for all files */
+.bg_blue{
+    background-color: blue;
+}
+.c_green{
+    color: rgb(29,191,115);
+}
+.line{
+    width: 400px;
+    margin-top: 10px;
+}
+.login_p{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+.cursor_ptr{
+    cursor:pointer;
+}

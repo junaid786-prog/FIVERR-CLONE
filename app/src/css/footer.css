@@ -1,0 +1,20 @@
+.footer_section{
+    margin-top: 50px;
+    width: 98vw;
+    padding: 30px;
+    background-color: whitesmoke;
+    display: flex;
+    justify-content: space-between;
+}
+.f_item h4{
+    margin-bottom: 20px;
+}
+.f_item ul li{
+    list-style: none;
+    padding: 3px 0px;
+    color: rgb(109, 105, 105);
+    cursor: pointer;
+}
+.f_item ul li:hover{
+    color: rgb(29,191,115);
+}

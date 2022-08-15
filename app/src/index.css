@@ -1,0 +1,38 @@
+*{
+  margin:0px;
+  padding:0px;
+  box-sizing: border-box;
+}
+body{
+  margin:0px;
+  padding:0px;
+  box-sizing: border-box;
+}
+.bg_blue{
+  background-color: blue;
+}
+.c_green{
+  color: rgb(29,191,115);
+}
+.bg_green{
+  background-color: rgb(29,191,115);
+}
+.spinner{
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.f_family{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.slick-slider button{
+  color: black;
+  /* background-color: rgb(121, 108, 108); */
+
+}
+.slick-slider button svg{
+  color: black;
+
+}
