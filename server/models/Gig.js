@@ -12,19 +12,17 @@ const GigSchema = new mongoose.Schema({
     maxlength: [1200, "description cannot be of more than 700 characters"],
     minlength: [400, "description cannot be of less than 400 characters"],
   },
-  images: [
-    {
-      public_id: {
-        // where these images will be hosted an id and url will be provided by hoster
-        type: String,
-        required: [true, "insert Gig image"],
-      },
-      url: {
-        type: String,
-        required: [true, "insert Gig image"],
-      },
+  images: {
+    public_id: {
+      // where these images will be hosted an id and url will be provided by hoster
+      type: String,
+      required: [true, "insert Gig image"],
     },
-  ],
+    url: {
+      type: String,
+      required: [true, "insert Gig image"],
+    },
+  },
   packages: [
     {
       package_name: {

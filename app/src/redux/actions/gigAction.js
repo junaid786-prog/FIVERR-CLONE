@@ -21,7 +21,10 @@ const config = {
   headers: { "content-Type": "application/json" },
   withCredentials: true,
 }
-
+const config2 = {
+  headers: { "content-Type": "multipart/form-data" },
+  withCredentials: true,
+}
 export const CreateGigAction = (gigData) => async (dispatch) => {
   try {
     dispatch({ type: CREATE_GIG_REQUEST })
@@ -30,12 +33,12 @@ export const CreateGigAction = (gigData) => async (dispatch) => {
       gigData,
       config
     )
-
     dispatch({
       type: CREATE_GIG_SUCCESS,
       payload: { gig: res.data.gig, message: res.data.message },
     })
   } catch (err) {
+    console.log(err)
     dispatch({ type: CREATE_GIG_FAIL, payload: err.response.data.message })
   }
 }

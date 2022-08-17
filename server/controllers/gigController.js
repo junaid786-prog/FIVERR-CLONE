@@ -3,20 +3,36 @@ const Seller = require("../models/Seller")
 const User = require("../models/User")
 const ApiError = require("../utils/ApiError")
 const CatchAsync = require("../utils/CatchAsync")
-
+const { v2 } = require("cloudinary")
 // 1. creating new gig
+v2.config({
+  cloud_name: "dxgk3lc63",
+  api_key: "385524412446863",
+  api_secret: "DgGlkreOh4Fs5EI5hRZXeeyowBA",
+  secure: true,
+})
+
 exports.createGig = CatchAsync(async (req, res, next) => {
   let seller = await User.findById(req.user.id)
   if (seller.gig_count > process.env.MAX_GIG_COUNT)
     throw new ApiError("Max Gig count can be 5", 401)
-  const { title, description, packages, images } = req.body
-
+  const { title, description, packages, images, tags, category } = req.body
+  const myCloud = await v2.uploader.upload(images, {
+    folder: "services_images",
+    crop: "scale",
+  })
+  console.log(myCloud)
   const newGig = await Gig.create({
     title: title,
     description: description,
     packages: packages,
-    images: images,
+    images: {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    },
     gig_seller: seller,
+    category: category,
+    tags: tags,
   })
   // updating that seller with newly created gigs
   seller.services_offered.push(newGig) // pushing new gig to seller's services

@@ -18,7 +18,13 @@ const SmallGig = ({ service }) => {
   return (
     <div className="small_gig">
       <div className="small_gig_img pd_5">
-        <img src={pic} />
+        <img
+          src={
+            service && service.images && service.images.url
+              ? service.images.url
+              : pic
+          }
+        />
       </div>
       <div className="small_gig_title pd_5">
         <Link to={`/gig/${service._id}`}>
@@ -27,7 +33,13 @@ const SmallGig = ({ service }) => {
       </div>
       <div className="small_gig_bottom pd_5">
         <Avatar>
-          <img src={pic} />
+          <img
+            src={
+              service && service.images && service.images.url
+                ? service.images.url
+                : pic
+            }
+          />
         </Avatar>
         <p className="f_bold">
           {service && service.packages && service.packages[0].package_price}$

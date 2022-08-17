@@ -6,36 +6,39 @@ import {
   BackupOutlined,
   TaskAlt,
   ArrowDropDown,
+  Camera,
 } from "@mui/icons-material"
 
 import { Editor } from "react-draft-wysiwyg"
 import { EditorState } from "draft-js"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
-import { useEffect, useState } from "react"
+import { createRef, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import PackageCreateTab from "./PackageCreateTab"
 import { CreateGigAction } from "../redux/actions/gigAction"
 import { useAlert } from "react-alert"
-//import Multiselect from "multiselect-react-dropdown"
+import Multiselect from "multiselect-react-dropdown"
 
 const CreateGigTab = () => {
+  const multiselectRef = createRef()
   const dispatch = useDispatch()
   const alert = useAlert()
   // state to store editor state
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
   )
-
   // state to save tab to be viewed index
   const [tabIndex, setTabIndex] = useState(1)
   // states to store content of  a gig
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [packages, setPackages] = useState([])
-  const [images, setimages] = useState([])
+  const [images, setimages] = useState("../assets/avtar_1.jpg")
+  const [imageName, setimageName] = useState("Select File")
   // state for downdrop
   const [isActive, setIsActive] = useState(false)
   const [selectedOption, setSelectedOption] = useState("Category")
+  const [multiselectOptions, setMultiselectOptions] = useState([])
   // functions
   // Editor functions
   const convertContent = () => {
@@ -65,10 +68,16 @@ const CreateGigTab = () => {
     }
   }
 
+  let tags = new Array()
+  multiselectOptions.map((o) => tags.push(o.Tag))
+
   const dataToRegister = {
     title,
     description,
     packages,
+    category: selectedOption,
+    tags,
+    images,
   }
 
   const { loading, message, gig, error } = useSelector(
@@ -76,9 +85,9 @@ const CreateGigTab = () => {
   )
 
   const gigUpload = () => {
-    console.log(description)
-    if (packages.length < 2) alert.error("at least two packaes are must")
-    else dispatch(CreateGigAction(dataToRegister))
+    // if (packages.length < 2) alert.error("at least two packaes are must")
+    // else dispatch(CreateGigAction(dataToRegister))
+    dispatch(CreateGigAction(dataToRegister))
   }
 
   useEffect(() => {
@@ -91,7 +100,7 @@ const CreateGigTab = () => {
       }
       setPackages([])
     }
-    if (gig.title && gig.title !== "") {
+    if (gig && gig.title && gig.title !== "") {
       alert.success(message)
       window.location.reload()
     }
@@ -108,36 +117,45 @@ const CreateGigTab = () => {
     "Proramming & Tech",
   ]
   const Tags = [
-    "design",
-    "amazing design",
-    "heavy graphics",
-    "graphics and design",
-    "boost ranking",
-    "diital marketing",
-    "sell online",
-    "digital ads",
-    "content writing",
-    "article writing",
-    "content translation",
-    "writing and translation",
-    "video editing",
-    "voice over",
-    "animated video",
-    "video and animation",
-    "audio editing",
-    "voice over",
-    "listen music",
-    "audio and music",
-    "web development",
-    "app development",
-    "machine learning",
-    "proramming and tech",
+    { Tag: "design", category: "Graphics & Design" },
+    { Tag: "amazing design", category: "Graphics & Design" },
+    { Tag: "heavy graphics", category: "Graphics & Design" },
+    { Tag: "graphics and design", category: "Graphics & Design" },
+    { Tag: "boost ranking", category: "Digital Marketing" },
+    { Tag: "diital marketing", category: "Digital Marketing" },
+    { Tag: "sell online", category: "Digital Marketing" },
+    { Tag: "digital ads", category: "Digital Marketing" },
+    { Tag: "content writing", category: "Writing & Translation" },
+    { Tag: "article writing", category: "Writing & Translation" },
+    { Tag: "content translation", category: "Writing & Translation" },
+    { Tag: "writing and translation", category: "Writing & Translation" },
+    { Tag: "video editing", category: "Video & Animation" },
+    { Tag: "voice over", category: "Video & Animation" },
+    { Tag: "animated video", category: "Video & Animation" },
+    { Tag: "video and animation", category: "Video & Animation" },
+    { Tag: "audio editing", category: "Audio & Music" },
+    { Tag: "voice over", category: "Audio & Music" },
+    { Tag: "listen music", category: "Audio & Music" },
+    { Tag: "audio and music", category: "Audio & Music" },
+    { Tag: "web development", category: "Proramming & Tech" },
+    { Tag: "app development", category: "Proramming & Tech" },
+    { Tag: "machine learning", category: "Proramming & Tech" },
+    { Tag: "proramming and tech", category: "Proramming & Tech" },
   ]
-  const d = [
-    { n: "design", id: 1 },
-    { n: "amazing design", id: 2 },
-  ]
-  const [o] = useState(d)
+
+  const rel_tags = Tags.filter((t) => t.category === selectedOption)
+  const convert = (e) => {
+    const f = e.target.files[0]
+    setimageName(f.name)
+    setFileToBase(f)
+  }
+  const setFileToBase = (f) => {
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(f)
+    fileReader.onloadend = () => {
+      setimages(fileReader.result)
+    }
+  }
   return (
     <div className="gig_creation_tab  f_family">
       <div className="gig_creation_sections">
@@ -204,9 +222,37 @@ const CreateGigTab = () => {
               })}
             </div>
             <p className="pd_10">Select Tags</p>
-            <div className="category_input"></div>
-            {/* <Multiselect /> */}
-            <input type="file" />
+
+            <div className="pd_10">
+              <Multiselect
+                options={rel_tags}
+                displayValue="Tag"
+                ref={multiselectRef}
+                onSelect={() =>
+                  setMultiselectOptions(
+                    multiselectRef.current.getSelectedItems()
+                  )
+                }
+                onRemove={() =>
+                  setMultiselectOptions(
+                    multiselectRef.current.getSelectedItems()
+                  )
+                }
+              />
+            </div>
+            <div className="pd_50">
+              <p>Upload gig image</p>
+            </div>
+            <div className="upload_file_wrapper" data-text={imageName}>
+              <input
+                name="file_upload_field"
+                type="file"
+                accept="image/png, image/jpg, image/gif, image/jpeg"
+                value=""
+                onChange={convert}
+              />
+              <br />
+            </div>
           </div>
         </div>
         <div className="gig_creation_tab_right">
