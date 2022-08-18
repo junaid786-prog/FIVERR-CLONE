@@ -33,7 +33,7 @@ const CreateGigTab = () => {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
   const [packages, setPackages] = useState([])
-  const [images, setimages] = useState("../assets/avtar_1.jpg")
+  const [images, setimages] = useState()
   const [imageName, setimageName] = useState("Select File")
   // state for downdrop
   const [isActive, setIsActive] = useState(false)
@@ -85,9 +85,9 @@ const CreateGigTab = () => {
   )
 
   const gigUpload = () => {
-    // if (packages.length < 2) alert.error("at least two packaes are must")
-    // else dispatch(CreateGigAction(dataToRegister))
-    dispatch(CreateGigAction(dataToRegister))
+    if (!images) alert.error("Enter gig image")
+    else if (packages.length < 2) alert.error("at least two packaes are must")
+    else dispatch(CreateGigAction(dataToRegister))
   }
 
   useEffect(() => {
@@ -146,8 +146,11 @@ const CreateGigTab = () => {
   const rel_tags = Tags.filter((t) => t.category === selectedOption)
   const convert = (e) => {
     const f = e.target.files[0]
-    setimageName(f.name)
-    setFileToBase(f)
+    if (f.size / 1000 > 500) alert.error("File size must be less than 500 KB")
+    else {
+      setimageName(f.name)
+      setFileToBase(f)
+    }
   }
   const setFileToBase = (f) => {
     const fileReader = new FileReader()

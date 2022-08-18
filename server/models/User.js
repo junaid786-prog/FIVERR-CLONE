@@ -81,6 +81,16 @@ const UserSchema = new mongoose.Schema({
       ref: "gigs",
     },
   ],
+  avtar: {
+    public_id: {
+      type: String,
+      required: [true, "public id is must"],
+    },
+    url: {
+      type: String,
+      required: [true, "url is required"],
+    },
+  },
 })
 // before saving schema to db first hashing the password
 UserSchema.pre("save", async function (next) {

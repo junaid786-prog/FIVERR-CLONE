@@ -79,3 +79,40 @@
 .cursor_ptr{
     cursor:pointer;
 }
+
+.upload_file_wrapper{
+    width: 250px;
+    height: 20px;
+    cursor: pointer;
+
+    position: relative;
+
+}
+.upload_file_wrapper::after{
+    content: attr(data-text);
+
+    border: 1px solid rgb(204, 194, 194);
+    border-radius: 5px;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-size: small;
+    color: rgb(110, 99, 99);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    padding: 10px 15px;
+    display:block;
+    pointer-events:none;
+    width: calc(100% - 40px);
+    height: 20px;
+    border-radius: 5pxs;
+    background-color: rgb(255, 255, 255);
+
+    position: absolute;
+    top:0;
+    left: 0;
+    z-index: 20;
+    line-height: 20px;
+}
+.mt_20{
+    margin-top: 30px;
+}

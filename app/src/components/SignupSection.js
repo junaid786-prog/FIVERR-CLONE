@@ -15,6 +15,8 @@ const SignupSection = () => {
   const [gmail, setGmail] = useState("")
   const [country, setCountry] = useState("")
   const [phoneNo, setPhoneno] = useState()
+  const [avtar, setAvtar] = useState("")
+  const [avtarName, setAvtarName] = useState("Select Avtar File")
   const [password, setPassword] = useState("")
   const [cPassword, setCPassword] = useState("")
 
@@ -24,14 +26,32 @@ const SignupSection = () => {
     country,
     phoneNo,
     password,
+    avtar,
   }
 
   const { isAuthenticated, message, loading, error } = useSelector(
     (state) => state.registeredUser
   )
 
+  const convert = (e) => {
+    const f = e.target.files[0]
+    if (f.size / 1000 > 500) alert.error("File size must be less than 500 KB")
+    else {
+      setAvtarName(f.name)
+      setFileToBase(f)
+    }
+  }
+  const setFileToBase = (f) => {
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(f)
+    fileReader.onloadend = () => {
+      setAvtar(fileReader.result)
+    }
+  }
+
   const registerUser = () => {
-    if (password !== cPassword)
+    if (!avtar) alert.error("Insert Avtar")
+    else if (password !== cPassword)
       alert.error("Password and confirm password are not same")
     else dispatch(registerUserAction(userForRegisteration))
   }
@@ -88,8 +108,17 @@ const SignupSection = () => {
           onChange={(e) => setCPassword(e.target.value)}
         />
       </div>
-      <div className="login_input"></div>
-      <div className="login_btn">
+      <div className="upload_file_wrapper" data-text={avtarName}>
+        <input
+          name="file_upload_field"
+          type="file"
+          accept="image/png, image/jpg, image/gif, image/jpeg"
+          value=""
+          onChange={convert}
+        />
+        <br />
+      </div>
+      <div className="login_btn mt_20">
         <button className="cursor_ptr" onClick={registerUser}>
           Continue
         </button>

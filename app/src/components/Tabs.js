@@ -12,7 +12,7 @@ export const ProfileTab = ({ user }) => {
   return (
     <div className="profile_tab">
       <div className="profile_tab_img">
-        <img src={profileImg} />
+        <img src={user && user.avtar && user.avtar.url} />
       </div>
       <div className="profile_change_btn">
         <CameraAltOutlined />

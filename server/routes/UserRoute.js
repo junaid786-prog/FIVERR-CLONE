@@ -1,8 +1,5 @@
 const express = require("express")
 const {
-  registerSeller,
-  getProfile,
-  login,
   logout,
   getAllSellers,
   updateProfile,
@@ -11,11 +8,7 @@ const {
   _getProfile,
   switchToSeller,
 } = require("../controllers/userController")
-const {
-  isAuthorized,
-  isSeller,
-  _isAuthorizedUser,
-} = require("../utils/Authorization")
+const { _isAuthorizedUser } = require("../utils/Authorization")
 const Router = express.Router()
 
 // Router.route("/register").post(registerSeller)

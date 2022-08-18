@@ -3,14 +3,8 @@ const Seller = require("../models/Seller")
 const User = require("../models/User")
 const ApiError = require("../utils/ApiError")
 const CatchAsync = require("../utils/CatchAsync")
-const { v2 } = require("cloudinary")
+const v2 = require("../utils/cloudinary")
 // 1. creating new gig
-v2.config({
-  cloud_name: "dxgk3lc63",
-  api_key: "385524412446863",
-  api_secret: "DgGlkreOh4Fs5EI5hRZXeeyowBA",
-  secure: true,
-})
 
 exports.createGig = CatchAsync(async (req, res, next) => {
   let seller = await User.findById(req.user.id)
@@ -21,7 +15,6 @@ exports.createGig = CatchAsync(async (req, res, next) => {
     folder: "services_images",
     crop: "scale",
   })
-  console.log(myCloud)
   const newGig = await Gig.create({
     title: title,
     description: description,

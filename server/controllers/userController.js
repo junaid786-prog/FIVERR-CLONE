@@ -1,46 +1,44 @@
-//const Buyer = require("../models/Buyer")
-//const Seller = require("../models/Seller")
 const User = require("../models/User")
 const ApiError = require("../utils/ApiError")
 const CatchAsync = require("../utils/CatchAsync")
-const { sendToken, _sendToken } = require("../utils/JWTToken")
+const { _sendToken } = require("../utils/JWTToken")
+const v2 = require("../utils/cloudinary")
+// // register new Seller
+// exports.registerSeller = CatchAsync(async (req, res, next) => {
+//   const { name, gmail, password, about, phoneNo, age, country, skills } =
+//     req.body
+//   const userExists = await User.findOne({ gmail })
+//   if (userExists) {
+//     throw new ApiError("User already exists", 400)
+//   }
 
-// register new Seller
-exports.registerSeller = CatchAsync(async (req, res, next) => {
-  const { name, gmail, password, about, phoneNo, age, country, skills } =
-    req.body
-  const userExists = await User.findOne({ gmail })
-  if (userExists) {
-    throw new ApiError("User already exists", 400)
-  }
+//   let year = new Date(Date.now()).getFullYear()
+//   const roles = ["user", "seller"]
+//   const newSeller = await Seller.create({
+//     name,
+//     gmail,
+//     password,
+//     about,
+//     phoneNo,
+//     age,
+//     country,
+//     skills,
+//     joining_year: year,
+//     role: roles,
+//   })
 
-  let year = new Date(Date.now()).getFullYear()
-  const roles = ["user", "seller"]
-  const newSeller = await Seller.create({
-    name,
-    gmail,
-    password,
-    about,
-    phoneNo,
-    age,
-    country,
-    skills,
-    joining_year: year,
-    role: roles,
-  })
+//   sendToken(newSeller, 200, res)
+// })
+// // login
+// exports.login = CatchAsync(async (req, res, next) => {
+//   const { gmail, password } = req.body
+//   const user = await Seller.findOne({ gmail }).select("+password")
+//   if (!user) throw new ApiError("Invalid gmail or password", 402)
+//   let ok = await user.comparePasswords(password)
+//   if (!ok) throw new ApiError("Invalid gmail or password 2", 402)
 
-  sendToken(newSeller, 200, res)
-})
-// login
-exports.login = CatchAsync(async (req, res, next) => {
-  const { gmail, password } = req.body
-  const user = await Seller.findOne({ gmail }).select("+password")
-  if (!user) throw new ApiError("Invalid gmail or password", 402)
-  let ok = await user.comparePasswords(password)
-  if (!ok) throw new ApiError("Invalid gmail or password 2", 402)
-
-  sendToken(user, 200, res)
-})
+//   sendToken(user, 200, res)
+// })
 // logout
 exports.logout = CatchAsync(async (req, res, next) => {
   res.cookie("token", null, {
@@ -87,9 +85,13 @@ exports.updateProfile = CatchAsync(async (req, res) => {
 // FOR GENERALIZED USER
 ////////////// REGISTER USER (START) -> as buyer //////////////////
 exports.registerUser = CatchAsync(async (req, res) => {
-  const { name, gmail, password, phoneNo, country } = req.body
+  const { name, gmail, password, phoneNo, country, avtar } = req.body
   const alreadyExists = await User.findOne({ gmail: gmail })
   if (alreadyExists) throw new ApiError("User already exists", 402)
+  const myCloud = await v2.uploader.upload(avtar, {
+    folder: "users_avtars",
+    crop: "scale",
+  })
   const user = await User.create({
     name,
     gmail,
@@ -98,6 +100,10 @@ exports.registerUser = CatchAsync(async (req, res) => {
     mode: "buyer",
     phoneNo,
     country,
+    avtar: {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    },
   })
   _sendToken(user, 200, res)
 })
