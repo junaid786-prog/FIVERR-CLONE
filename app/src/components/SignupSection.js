@@ -53,7 +53,9 @@ const SignupSection = () => {
     if (!avtar) alert.error("Insert Avtar")
     else if (password !== cPassword)
       alert.error("Password and confirm password are not same")
-    else dispatch(registerUserAction(userForRegisteration))
+    else {
+      dispatch(registerUserAction(userForRegisteration))
+    }
   }
   useEffect(() => {
     if (error)

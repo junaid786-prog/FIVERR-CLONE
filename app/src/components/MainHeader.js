@@ -66,7 +66,10 @@ const MainHeader = () => {
           ) : (
             <div className="avtar">
               <Link to="/buyer/me">
-                <img src={avtar_1} alt={user.name} />
+                <img
+                  src={user && user.avtar ? user.avtar.url : avtar_1}
+                  alt={user.name}
+                />
               </Link>
             </div>
           )}

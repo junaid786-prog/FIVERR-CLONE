@@ -34,6 +34,7 @@
 }
 .gig_page_images img{
     width: 650px;
+    height: 300px;
     padding: 10px;
 }
 .gig_page_description{
@@ -231,4 +232,7 @@
 .display_pkg_info{
     display: flex;
     justify-content: space-between;
+}
+.c_red{
+    color: red;
 }

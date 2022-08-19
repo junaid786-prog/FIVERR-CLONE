@@ -14,7 +14,10 @@ exports.createGig = CatchAsync(async (req, res, next) => {
   const myCloud = await v2.uploader.upload(images, {
     folder: "services_images",
     crop: "scale",
+    public_id: `${Date.now()}`,
+    resource_type: "auto",
   })
+
   const newGig = await Gig.create({
     title: title,
     description: description,
@@ -151,5 +154,33 @@ exports.getMyFavoriteGigs = CatchAsync(async (req, res, next) => {
   }
   res.status(200).json({
     fav_services: gigs,
+  })
+})
+
+// 8. Make  Gig Un Like
+
+exports.unLikeGig = CatchAsync(async (req, res, next) => {
+  const user = await User.findById(req.user.id)
+  const gig = await Gig.findById(req.params.id)
+  if (!user || !gig) throw new ApiError("Gig or user doesn't exist", 404)
+
+  let arr = user.favourite_gigs.filter(
+    (service) => service._id.toString() !== gig._id.toString()
+  )
+  // if (user.favourite_gigs.length === 0) {
+  //   user.favourite_gigs.push(gig)
+  // } else {
+  //   user.favourite_gigs.forEach((service) => {
+  //     if (service._id.toString() === gig._id.toString())
+  //       throw new ApiError("Gig is already liked", 401)
+  //   })
+  //   user.favourite_gigs.push(gig)
+  // }
+  user.favourite_gigs = arr
+  await user.save()
+  res.status(201).json({
+    success: true,
+    liked_services: user.favourite_gigs,
+    message: "Gig is successfully added to favorite",
   })
 })

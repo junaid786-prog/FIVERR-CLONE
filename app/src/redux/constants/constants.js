@@ -30,6 +30,10 @@ export const LIKE_GIG_REQUEST = "like_gig_request"
 export const LIKE_GIG_SUCCESS = "like_gig_success"
 export const LIKE_GIG_FAIL = "like_gig_fail"
 
+export const UN_LIKE_GIG_REQUEST = "un_like_gig_request"
+export const UN_LIKE_GIG_SUCCESS = "un_like_gig_success"
+export const UN_LIKE_GIG_FAIL = "un_like_gig_fail"
+
 export const MY_FAV_GIGS_REQUEST = "my_fav_gigs_request"
 export const MY_FAV_GIGS_SUCCESS = "my_fav_gigs_success"
 export const MY_FAV_GIGS_FAIL = "my_fav_gigs_fail"

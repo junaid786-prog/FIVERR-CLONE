@@ -14,6 +14,9 @@ import {
   SINGLE_GIG_FAIL,
   SINGLE_GIG_REQUEST,
   SINGLE_GIG_SUCCESS,
+  UN_LIKE_GIG_FAIL,
+  UN_LIKE_GIG_REQUEST,
+  UN_LIKE_GIG_SUCCESS,
 } from "../constants/constants"
 
 export const CreateNewGig = (state = { gig: {} }, action) => {
@@ -107,6 +110,27 @@ export const LikeGig = (state = {}, action) => {
         message: action.payload,
       }
     case LIKE_GIG_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      }
+    default:
+      return { ...state }
+  }
+}
+
+export const UnLikeGig = (state = {}, action) => {
+  switch (action.type) {
+    case UN_LIKE_GIG_REQUEST:
+      return {
+        loading: true,
+      }
+    case UN_LIKE_GIG_SUCCESS:
+      return {
+        loading: false,
+        message: action.payload,
+      }
+    case UN_LIKE_GIG_FAIL:
       return {
         loading: false,
         error: action.payload,

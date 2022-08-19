@@ -12,6 +12,7 @@ import {
   GetMyGigs,
   GetSingleGig,
   LikeGig,
+  UnLikeGig,
 } from "./reducers/gigReducer"
 
 const middelWare = [thunk]
@@ -25,6 +26,7 @@ const RootReducer = combineReducers({
   singleGig: GetSingleGig,
   likedGig: LikeGig,
   myFavGigs: GetFavGigs,
+  unlikeGig: UnLikeGig,
 })
 const Store = createStore(
   RootReducer,

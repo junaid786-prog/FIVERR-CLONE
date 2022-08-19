@@ -12,7 +12,11 @@ export const ProfileTab = ({ user }) => {
   return (
     <div className="profile_tab">
       <div className="profile_tab_img">
-        <img src={user && user.avtar && user.avtar.url} />
+        <img
+          src={
+            user && user.avtar && user.avtar.url ? user.avtar.url : profileImg
+          }
+        />
       </div>
       <div className="profile_change_btn">
         <CameraAltOutlined />
@@ -39,13 +43,28 @@ export const MessagesTab = ({ user }) => {
 export const FavoriteGigsTab = ({ changeIndex }) => {
   const dispatch = useDispatch()
   const alert = useAlert()
-  const { services, error } = useSelector((state) => state.myFavGigs)
+  const { services, error, message } = useSelector((state) => state.myFavGigs)
+  const state = useSelector((state) => state.unlikeGig)
   useEffect(() => {
-    dispatch(GetFavGigsAction())
+    //dispatch(GetFavGigsAction())
     if (error) {
       alert.error(error)
+    } else if (message) {
+      alert.info(message)
     }
-  }, [])
+  }, [error, message])
+
+  useEffect(() => {
+    if (state.error) {
+      alert.error(state.error)
+    } else if (state.message) {
+      alert.success(state.message)
+    }
+  }, [state])
+
+  useEffect(() => {
+    dispatch(GetFavGigsAction())
+  }, [dispatch])
 
   return (
     <div className="favorite_gigs_tab">
@@ -61,7 +80,7 @@ export const FavoriteGigsTab = ({ changeIndex }) => {
         <div className="my_gigs">
           {services &&
             services.map((service) => {
-              return <SmallGig service={service} />
+              return <SmallGig service={service} changeIndex={changeIndex} />
             })}
         </div>
       )}
@@ -81,13 +100,17 @@ export const MyGigsTab = ({ user, changeIndex }) => {
   const { error, message } = useSelector((state) => state.likedGig)
 
   useEffect(() => {
-    dispatch(GetMyGigsAction())
+    //dispatch(GetMyGigsAction())
     if (error) {
       alert.error(error)
     } else if (message) {
       alert.success(message)
     }
-  }, [error, message, dispatch, alert])
+  }, [error, message, alert])
+
+  useEffect(() => {
+    dispatch(GetMyGigsAction())
+  }, [dispatch])
 
   const { loading, services } = useSelector((state) => state.myGigs)
   return (
@@ -108,7 +131,13 @@ export const MyGigsTab = ({ user, changeIndex }) => {
           ) : (
             <div className="my_gigs">
               {services.map((service) => {
-                return <SmallGig service={service} />
+                return (
+                  <SmallGig
+                    service={service}
+                    user={user}
+                    changeIndex={changeIndex}
+                  />
+                )
               })}
             </div>
           )}

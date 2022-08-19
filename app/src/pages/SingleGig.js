@@ -20,7 +20,6 @@ const SingleGig = () => {
   const { user } = useSelector((state) => state.userProfile)
   useEffect(() => {
     dispatch(GetSingleGigAction(params._id))
-    console.log(loading, service)
   }, [])
 
   return !loading ? (
@@ -31,7 +30,7 @@ const SingleGig = () => {
         </div>
         <div className="gig_page_user_info pd_5">
           <Avatar>
-            <img src={avtar_1} />
+            <img src={user && user.avtar ? user.avtar.url : avtar_1} />
           </Avatar>
           <p>{user.name}</p>
           <p>Level 2 Seller | </p>
@@ -43,7 +42,13 @@ const SingleGig = () => {
           <p>(45)</p>
         </div>
         <div className="gig_page_images pd_5">
-          <img src={pic} />
+          <img
+            src={
+              service && service.images && service.images.url
+                ? service.images.url
+                : pic
+            }
+          />
         </div>
         <div className="gig_page_description pd_10">
           <h3>About This Gig</h3>
@@ -53,7 +58,7 @@ const SingleGig = () => {
           <h3>About The Seller</h3>
           <div className="about_seller_top pd_10">
             <div className="about_seller_avtar">
-              <img src={avtar_1} />
+              <img src={user && user.avtar ? user.avtar.url : avtar_1} />
             </div>
             <div className="about_seller_info">
               <p className="pd_5">{user.name}</p>
